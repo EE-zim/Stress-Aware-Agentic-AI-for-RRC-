@@ -1,12 +1,26 @@
 # Stress-Aware Agentic AI for RRC
 
-This repository contains simple examples for a multi-agent system that controls 5G Radio Resource Control (RRC) messages with stress awareness. It includes:
 
-- `stress_aware_controller_plan.md` – a design document describing log processing and stress-based prompting.
-- `stress_aware_controller.py` – Python code to clean log data, compute stress levels, build prompts, and call the OpenAI API (e.g., GPT-4o).
+This project provides a scaffold for a stress-aware multi-agent controller for 5G Radio Resource Control (RRC).
+It includes placeholders for data ingestion, stress classification, agent logic, and a FastAPI service.
 
-Example usage:
+## Structure
+- `data_ingest/` – utilities to parse RRC log CSV files
+- `stress_classifier/` – rule-based stress level labeler
+- `agents/` – network context and decision agents
+- `api/` – FastAPI application exposing trigger and status endpoints
+- `tests/` – pytest suite
+
+## Development
+Install dependencies and run tests:
 ```bash
-python stress_aware_controller.py rrc_log.csv "UE requests handover" --api-key YOUR_OPENAI_KEY
+python -m pip install -r requirements.txt
+pytest
 ```
-This will print the detected stress level, show the generated prompt, and display the model's response.
+
+Run the API locally:
+```bash
+uvicorn api.main:app --reload
+```
+
+A `Dockerfile` is provided for containerized deployment.
